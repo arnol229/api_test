@@ -1,0 +1,18 @@
+# Pull base image.
+FROM ubuntu:14.04
+
+# Update ubuntu and Install pip.
+RUN apt-get -qq update && apt-get -qq install -y \
+    python-pip
+
+# Add files.
+ADD . /opt/server
+
+# Define working directory.
+WORKDIR /opt/server
+
+# change into directory and install python requirements
+RUN pip install -r REQUIREMENTS.txt
+
+# Define default command.
+CMD ["bash"]
