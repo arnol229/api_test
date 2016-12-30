@@ -1,12 +1,9 @@
 from django.conf.urls import url, include
 from rest_framework import routers
-import views
+from server import APIRoot
 
 urlpatterns = [
-    url(r'^$', views.APIRoot.as_view(), name='api_root'),
-    
-    # TODO: match /api/threat/ip/1.2.3.4
-    url(r'<your regex here>', ip_views.IPDetailsView.as_view(), name='threat_details'),
-    
-    # TODO: match /api/traffic
+    url(r'^$', APIRoot.as_view(), name='root'),
+
+    url(r'^api/', include('api.urls', namespace="api"))
 ]
