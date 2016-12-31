@@ -4,6 +4,8 @@ import re
 import calendar
 import time
 
+from api_test.datastore import Reputation
+
 # Known bad: 69.43.161.174
 # Known good: 8.8.8.8
 # Find more examples at https://www.alienvault.com/open-threat-exchange/dashboard
