@@ -9,8 +9,11 @@ from api_test.datastore import IPDetails, DetailsSerializer
         
 class IPDetailsView(APIView):
     def get(self, request, *args, **kw):
+        print "in ip details view"
+        # look for ip from request path, if not then try GET param
+        ip = args.get("ip", request.GET.get("ip", None))
         try:
-            [int(x) for x in args.get(ip, None).split('.')]
+            [int(x) for x in ip.split('.')]
         except:
             return Response("invalid IP")
         
@@ -18,7 +21,7 @@ class IPDetailsView(APIView):
 
         result = DetailsSerializer(details_request)
         response = Response(result.data, status=status.HTTP_200_OK)
-
+        print "returning response"
         return response
 
         
