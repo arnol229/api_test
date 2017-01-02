@@ -16,7 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ROUTES = {
-    'IPDetails': 'http://reputation.us.alienvault.com/panel/ip_json.php'
+    'IPDetails': 'http://reputation.alienvault.com/panel/ip_json.php'
 }
 
 # Quick-start development settings - unsuitable for production
