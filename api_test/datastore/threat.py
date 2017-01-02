@@ -2,6 +2,7 @@ from api_test.datastore import DetailsSerializer
 from django.conf import settings
 import requests
 
+
 class IPDetails(object):
     def __init__(self, *args, **kw):
         self.address = kw.get('address')
@@ -21,13 +22,13 @@ class IPDetails(object):
     def get_details(ip):
         """
         Retrieves ip details and validates data against the DetailsSerializer
-        If valid, creates and returns an IPDetails object 
+        If valid, creates and returns an IPDetails object
         """
         try:
             url = settings.ROUTES['IPDetails']
-            result = requests.get(url, params={'ip':ip})
+            result = requests.get(url, params={'ip': ip})
             if not result.text:
-                return IPDetails({"address": ip})
+                return IPDetails(**{"address": ip})
 
             mapped_results = DetailsSerializer.map_details(result.json())
             serializer = DetailsSerializer(data=mapped_results)
@@ -39,7 +40,7 @@ class IPDetails(object):
             else:
                 ip_details = {"address": ip}
 
-            return IPDetails(ip_details)
+            return IPDetails(**ip_details)
         except Exception as e:
             raise Exception("IP details error: {0}".format(str(e)))
 

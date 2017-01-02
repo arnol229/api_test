@@ -29,20 +29,25 @@ SECRET_KEY = '9wb$ynx96-t$gc^in6n&whyg#c@6jy-j%95ob_(s&b&_58+g+k'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+# import django
+# django.setup()
 
 # Application definition
 
 INSTALLED_APPS = (
+    # 'api_test.datastore.apps.DatastoreConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'api_test.api',
-    'api_test.datastore'
+    # 'api_test.datastore'
+    # 'api_test.datastore.apps.DatastoreConfig',
 )
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -1,6 +1,7 @@
 from rest_framework import serializers
-
 from operator import getitem
+
+
 def dot_get(data, s, default=None):
     """
     helper function to drill into multilayer JSON object cleanly.
@@ -11,15 +12,16 @@ def dot_get(data, s, default=None):
     except KeyError:
         return default
 
+
 class DetailsSerializer(serializers.Serializer):
-    address = serializers.Field()
-    id = serializers.Field()
-    reputation_val = serializers.Field()
-    first_activity = serializers.Field()
-    last_activity = serializers.Field()
-    activities = serializers.Field()
-    activity_types = serializers.Field()
-    is_valid = serializers.Field()
+    address = serializers.ReadOnlyField()
+    id = serializers.ReadOnlyField()
+    reputation_val = serializers.ReadOnlyField()
+    first_activity = serializers.ReadOnlyField()
+    last_activity = serializers.ReadOnlyField()
+    activities = serializers.ReadOnlyField()
+    activity_types = serializers.ReadOnlyField()
+    is_valid = serializers.ReadOnlyField()
 
     def to_internal_value(self, data):
         return data
@@ -31,7 +33,7 @@ class DetailsSerializer(serializers.Serializer):
                 "Activity_type": a.get("name", None),
                 "First_date": dot_get(a, 'first_date.sec'),
                 "Last_date": dot_get(a, 'last_date.sec'),
-                    } for a in data.get("activities", [])]
+            } for a in data.get("activities", [])]
 
             timestamped_activities = filter(lambda k: k.get("Last_date") is not None, activities)
             first_activity_time = min([a['First_date'] for a in timestamped_activities])

@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 import time
 import requests
 
+
 class APIRoot(APIView):
     def get(self, request):
         ip = request.GET.get('ip', '')
